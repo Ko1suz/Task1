@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
 
     private void Start() {
-        targetCar = FindObjectOfType<AAAAAAAAAAAAAAAAAAAAAAAAA>().transform;
+        targetCar = FindObjectOfType<ArabaKontrol>().transform;
     }
     private void FixedUpdate() {
         FollowTarget(); 

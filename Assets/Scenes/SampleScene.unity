@@ -1734,7 +1734,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 253212673}
   serializedVersion: 7
-  lengthInSec: 0.1
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -1799,7 +1799,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 1
+  moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -2300,7 +2300,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -1
+      scalar: -2
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -13892,7 +13892,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1766948328}
   serializedVersion: 7
-  lengthInSec: 0.4
+  lengthInSec: 0.1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -20704,42 +20704,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2132999967}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &345188204287592163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5106513190854045519}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f938e239b9d044c897d4526efc674e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAccleration: 40
-  nosPower: 1000
-  breakAccleraiton: 1000
-  turnSensivity: 1
-  maxSteerAngle: 30
-  _centerOfMass: {x: 0, y: 0, z: 0}
-  wheels:
-  - WheelModel: {fileID: 5106513190854045509}
-    wheelCollider: {fileID: 575656467}
-    axel: 0
-  - WheelModel: {fileID: 5106513190854045511}
-    wheelCollider: {fileID: 1159151177}
-    axel: 0
-  - WheelModel: {fileID: 5106513190854045505}
-    wheelCollider: {fileID: 513146095}
-    axel: 1
-  - WheelModel: {fileID: 5106513190854045507}
-    wheelCollider: {fileID: 945435958}
-    axel: 1
-  exhoust: {fileID: 253212675}
-  nitro: {fileID: 1766948329}
-  energyUI: {fileID: 441150329}
-  trailRenderer1: {fileID: 12459013}
-  trailRenderer2: {fileID: 402498894}
 --- !u!1 &4873547889539238261
 GameObject:
   m_ObjectHideFlags: 0
@@ -21218,9 +21182,9 @@ GameObject:
   - component: {fileID: 5106513190854079343}
   - component: {fileID: 5106513190850687811}
   - component: {fileID: 5106513190851785091}
-  - component: {fileID: 345188204287592163}
   - component: {fileID: 5106513190854045520}
   - component: {fileID: 5106513190854045521}
+  - component: {fileID: 5106513190854045522}
   m_Layer: 0
   m_Name: NewCar
   m_TagString: Untagged
@@ -21258,6 +21222,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5106513190854045522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5106513190854045519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5e182b03a5d784dae667dc271c66a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAccleration: 40
+  nosPower: 1000
+  breakAccleraiton: 1000
+  turnSensivity: 1
+  maxSteerAngle: 30
+  _centerOfMass: {x: 0, y: 0, z: 1}
+  wheels:
+  - WheelModel: {fileID: 5106513190854045509}
+    wheelCollider: {fileID: 575656467}
+    axel: 0
+  - WheelModel: {fileID: 5106513190854045511}
+    wheelCollider: {fileID: 1159151177}
+    axel: 0
+  - WheelModel: {fileID: 5106513190854045505}
+    wheelCollider: {fileID: 513146095}
+    axel: 1
+  - WheelModel: {fileID: 5106513190854045507}
+    wheelCollider: {fileID: 945435958}
+    axel: 1
+  exhoust: {fileID: 253212675}
+  nitro: {fileID: 1766948329}
+  energyUI: {fileID: 441150329}
+  trailRenderer1: {fileID: 12459013}
+  trailRenderer2: {fileID: 402498894}
 --- !u!4 &5106513190854079329
 Transform:
   m_ObjectHideFlags: 0

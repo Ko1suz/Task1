@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class CarControllerr : MonoBehaviour
+public class ArabaKontrol : MonoBehaviour
 {
     public enum Axel
     {
@@ -40,13 +40,9 @@ public class CarControllerr : MonoBehaviour
     public TrailRenderer trailRenderer1;
     public TrailRenderer trailRenderer2;
 
-    private void Awake()
-    {
-        CarStats.instance.currnetEnergy = CarStats.instance.maxEnergy; // mevcut enerjiyi maksimum enerjiye eştiler
-    }
-
     private void Start()
     {
+        CarStats.instance.currnetEnergy = CarStats.instance.maxEnergy; // mevcut enerjiyi maksimum enerjiye eştiler
         carRb = GetComponent<Rigidbody>(); // başlangıçta carRB'yi arabanın rigidbodysine eşitler
         carRb.centerOfMass = _centerOfMass; // carRbnin. ağırlık merkezini kendi oluşturduğumuz referansa eşitler
         energyUI.SetMaxEnergyhUI(CarStats.instance.maxEnergy); // UI için sliderın mevcut enerjiyi maks enerjiye ayarlar

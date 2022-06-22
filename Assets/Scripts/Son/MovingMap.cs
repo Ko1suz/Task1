@@ -10,7 +10,7 @@ public class MovingMap : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Player = FindObjectOfType<AAAAAAAAAAAAAAAAAAAAAAAAA>().transform; // :D oyun başında karakteri bulamamıza yarıyor
+        Player = FindObjectOfType<ArabaKontrol>().transform; // :D oyun başında karakteri bulamamıza yarıyor
     }
 
     // Update is called once per frame
