@@ -7,16 +7,16 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
 {
     public enum Axel
     {
-        Front,
-        Rear
+        Front, // ön 
+        Rear // arka
     }
 
     [Serializable]
     public struct Wheel
     {
-        public GameObject WheelModel;
-        public WheelCollider wheelCollider;
-        public Axel axel;
+        public GameObject WheelModel; // teker model
+        public WheelCollider wheelCollider; // teker collider
+        public Axel axel; // enum
     }
 
     public float maxAccleration = 30.0f; // maximum hız
@@ -34,18 +34,32 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
     float steerInput; // dönüş (Tekerler) tuşları ref
 
     private Rigidbody carRb; // arabanın rigidbodysi
+    public ParticleSystem exhoust;
+    public ParticleSystem nitro;
+    public EnergyUI energyUI;
+    public TrailRenderer trailRenderer1;
+    public TrailRenderer trailRenderer2;
+
+    private void Awake()
+    {
+        CarStats.instance.currnetEnergy = CarStats.instance.maxEnergy; // mevcut enerjiyi maksimum enerjiye eştiler
+    }
 
     private void Start()
     {
         carRb = GetComponent<Rigidbody>(); // başlangıçta carRB'yi arabanın rigidbodysine eşitler
         carRb.centerOfMass = _centerOfMass; // carRbnin. ağırlık merkezini kendi oluşturduğumuz referansa eşitler
-        
+        energyUI.SetMaxEnergyhUI(CarStats.instance.maxEnergy); // UI için sliderın mevcut enerjiyi maks enerjiye ayarlar
+
+
     }
 
     private void Update()
     {
         GetInputs();
         AnimationWheels();
+        particles();
+        
     }
     private void LateUpdate()
     {
@@ -55,7 +69,7 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
     }
     void GetInputs()
     {
-        
+
         moveInput = Input.GetAxis("Vertical");
         steerInput = Input.GetAxis("Horizontal");
     }
@@ -64,15 +78,16 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
     {
         foreach (var wheel in wheels)
         {
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetKey(KeyCode.LeftShift) && CarStats.instance.currnetEnergy > 0)
             {
-                carRb.AddForce(transform.forward*nosPower);
+                carRb.AddForce(transform.forward * nosPower);
+                CarStats.instance.SetCarEnergy(-1 * Time.deltaTime * 10);
             }
             else
             {
-                wheel.wheelCollider.motorTorque = moveInput *600* maxAccleration * Time.deltaTime;
+                wheel.wheelCollider.motorTorque = moveInput * 600 * maxAccleration * Time.deltaTime;
             }
-            
+
         }
     }
 
@@ -82,7 +97,7 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
         {
             if (wheel.axel == Axel.Front)
             {
-                var _steerAngle = steerInput * turnSensivity  * maxSteerAngle;
+                var _steerAngle = steerInput * turnSensivity * maxSteerAngle;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, _steerAngle, 0.6f);
             }
         }
@@ -117,5 +132,28 @@ public class AAAAAAAAAAAAAAAAAAAAAAAAA : MonoBehaviour
             wheel.WheelModel.transform.position = pos;
             wheel.WheelModel.transform.rotation = rot;
         }
+    }
+
+    
+    void particles() //particle effect kontrolleri
+    {
+
+        if (Input.GetKey(KeyCode.LeftShift) && CarStats.instance.currnetEnergy>0)
+        {
+            
+            nitro.Play();
+            exhoust.Stop();
+            trailRenderer1.enabled = true;
+            trailRenderer2.enabled = true;
+        }
+        else
+        {
+            nitro.Stop();
+            exhoust.Play();
+            trailRenderer1.enabled = false;
+            trailRenderer2.enabled = false;
+        }
+
+
     }
 }
