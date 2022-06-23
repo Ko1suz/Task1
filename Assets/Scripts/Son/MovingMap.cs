@@ -7,6 +7,8 @@ public class MovingMap : MonoBehaviour
     public Transform Player;
     private int artisX;
     private int artisY;
+
+    public int mesafe = 1500;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,25 +24,25 @@ public class MovingMap : MonoBehaviour
 
     void x() // seçilen karakterin uzaydaki konumuna göre oluştuduğun haritayı belirli aralıklara pozisyonunu değiştirir
     {
-        if (Player.transform.position.x >= transform.position.x + 50)
+        if (Player.transform.position.x >= transform.position.x + mesafe)
         {
             transform.position = new Vector3(artisX,0, artisY);
-            artisX += 50;
+            artisX += mesafe;
         }
-        if (Player.transform.position.x <= transform.position.x - 50)
+        if (Player.transform.position.x <= transform.position.x - mesafe)
         {
             transform.position = new Vector3(artisX,0, artisY);
-            artisX -= 50;
+            artisX -= mesafe;
         }
-        if (Player.transform.position.z >= transform.position.z + 50)
+        if (Player.transform.position.z >= transform.position.z + mesafe)
         {
             transform.position = new Vector3(artisX,0, artisY);
-            artisY += 50;
+            artisY += mesafe;
         }
-        if (Player.transform.position.z <= transform.position.z - 50)
+        if (Player.transform.position.z <= transform.position.z - mesafe)
         {
             transform.position = new Vector3(artisX,0, artisY);
-            artisY -= 50;
+            artisY -= mesafe;
         }
         // else if (Player.transform.position.y >= transform.position.y + 64 && Player.transform.position.x >= transform.position.x + 64)
         // {

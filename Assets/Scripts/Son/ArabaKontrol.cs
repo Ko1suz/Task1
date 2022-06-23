@@ -40,6 +40,10 @@ public class ArabaKontrol : MonoBehaviour
     public TrailRenderer trailRenderer1;
     public TrailRenderer trailRenderer2;
 
+    public TrailRenderer[] tireMarks;
+    private bool tireMarksFlag;
+    public static bool nos;
+
     private void Start()
     {
         CarStats.instance.currnetEnergy = CarStats.instance.maxEnergy; // mevcut enerjiyi maksimum enerjiye eştiler
@@ -55,7 +59,8 @@ public class ArabaKontrol : MonoBehaviour
         GetInputs();
         AnimationWheels();
         particles();
-        
+        checkDritft();
+
     }
     private void LateUpdate()
     {
@@ -130,17 +135,18 @@ public class ArabaKontrol : MonoBehaviour
         }
     }
 
-    
+
     void particles() //particle effect kontrolleri
     {
 
-        if (Input.GetKey(KeyCode.LeftShift) && CarStats.instance.currnetEnergy>0)
+        if (Input.GetKey(KeyCode.LeftShift) && CarStats.instance.currnetEnergy > 0)
         {
-            
+
             nitro.Play();
             exhoust.Stop();
             trailRenderer1.enabled = true;
             trailRenderer2.enabled = true;
+            nos = true;
         }
         else
         {
@@ -148,8 +154,50 @@ public class ArabaKontrol : MonoBehaviour
             exhoust.Play();
             trailRenderer1.enabled = false;
             trailRenderer2.enabled = false;
+            nos = false;
+        }
+    }
+
+    void checkDritft()
+    {
+        if (Input.GetKey(KeyCode.Space) && GroundCheck.groundCheck)
+        {
+            startEmitter();
+        }
+        else
+        {
+            stopEmitter();
+        }
+    }
+
+    void startEmitter()
+    {
+        if (tireMarksFlag)
+        {
+            return;
+        }
+        foreach (var T in tireMarks)
+        {
+            T.emitting = true;
         }
 
-
+        tireMarksFlag = true;
     }
+
+    void stopEmitter()
+    {
+        if (!tireMarksFlag)
+        {
+            return;
+        }
+        foreach (var T in tireMarks)
+        {
+            T.emitting = false;
+        }
+
+        tireMarksFlag = false;
+    }
+
+    
+
 }
